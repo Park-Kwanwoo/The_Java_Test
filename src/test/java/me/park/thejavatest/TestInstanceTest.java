@@ -26,7 +26,6 @@ class TestInstanceTest {
         System.out.println(this);
         System.out.println("create " + value++);
     }
-dd
 
     @BeforeAll
     void beforeAll() {
