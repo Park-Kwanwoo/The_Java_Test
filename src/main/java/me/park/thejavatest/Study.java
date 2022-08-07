@@ -3,7 +3,6 @@ package me.park.thejavatest;
 public class Study {
 
     private StudyStatus status;
-
     private String name;
 
     public Study(int limit, String name) {
