@@ -55,4 +55,5 @@ class StudyServiceTest {
         });
         assertEquals(Optional.empty(), memberService.findById(3L));
     }
+
 }
