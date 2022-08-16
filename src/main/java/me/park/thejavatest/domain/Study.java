@@ -1,9 +1,10 @@
 package me.park.thejavatest.domain;
 
-import me.park.thejavatest.StudyStatus;
+import me.park.thejavatest.study.StudyStatus;
 
 public class Study {
 
+    private Long id;
     private Member owner;
     private StudyStatus status;
     private String name;
@@ -49,5 +50,9 @@ public class Study {
                 ", name='" + name + '\'' +
                 ", limit=" + limit +
                 '}';
+    }
+
+    public void open() {
+        this.op
     }
 }
