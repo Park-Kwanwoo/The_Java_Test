@@ -6,6 +6,7 @@ import me.park.thejavatest.member.MemberService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -13,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class StudyTest {
@@ -38,5 +39,16 @@ public class StudyTest {
 
         studyService.createNewStudy(1L, study);
         assertEquals(member, study.getOwner());
+
+        // 객체가 몇 번 호출 되는지 확인
+        verify(memberService, times(1)).notify(study);
+        verifyNoMoreInteractions(memberService);
+        verify(memberService, times(1)).notify(member);
+        verify(memberService, never()).validate(any());
+
+        // 호출 순서를 지키는 지
+        InOrder inOrder = inOrder(memberService);
+        inOrder.verify(memberService).notify(study);
+        inOrder.verify(memberService).notify(member);
     }
 }
