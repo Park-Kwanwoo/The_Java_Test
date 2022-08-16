@@ -2,12 +2,17 @@ package me.park.thejavatest.domain;
 
 import me.park.thejavatest.study.StudyStatus;
 
+import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
+
 public class Study {
 
     private Long id;
-    private Member owner;
     private StudyStatus status;
     private String name;
+    private LocalDateTime openedDateTime;
+    @ManyToOne
+    private Member owner;
 
     public Study(int limit, String name) {
         this.name = name;
@@ -43,6 +48,14 @@ public class Study {
         this.owner = owner;
     }
 
+    public LocalDateTime getOpenedDateTime() {
+        return openedDateTime;
+    }
+
+    public void setOpenedDateTime(LocalDateTime openedDateTime) {
+        this.openedDateTime = openedDateTime;
+    }
+
     @Override
     public String toString() {
         return "Study{" +
@@ -53,6 +66,7 @@ public class Study {
     }
 
     public void open() {
-        this.op
+        this.openedDateTime = LocalDateTime.now();
+        this.status = StudyStatus.OPENED;
     }
 }

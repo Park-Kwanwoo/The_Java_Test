@@ -28,6 +28,7 @@ public class StudyService {
     }
 
     public Study openStudy(Study study) {
+
         study.open();
         Study openedStudy = repository.save(study);
         memberService.notify(openedStudy);
