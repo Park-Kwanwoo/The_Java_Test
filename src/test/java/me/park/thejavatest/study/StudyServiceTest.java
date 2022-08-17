@@ -5,6 +5,7 @@ import me.park.thejavatest.domain.Study;
 import me.park.thejavatest.member.MemberService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 
@@ -32,6 +34,8 @@ class StudyServiceTest {
     @Autowired
     private StudyRepository studyRepository;
 
+    @Container
+    // static 으로 공유를 하지 않으면 매 테스트 마다 띄우고 끄기 때문에 속도가 심하게 저하 됨
     static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer()
             .withDatabaseName("studytest");
 
@@ -40,6 +44,10 @@ class StudyServiceTest {
         postgreSQLContainer.start();
     }
 
+    @BeforeEach
+    void beforeEach() {
+        studyRepository.deleteAll();
+    }
     @AfterAll
     static void afterAll() {
         postgreSQLContainer.stop();
