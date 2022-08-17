@@ -1,5 +1,6 @@
 package me.park.thejavatest;
 
+import me.park.thejavatest.domain.Study;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.ParameterizedTest;

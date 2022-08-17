@@ -2,7 +2,7 @@ package me.park.thejavatest.domain;
 
 import me.park.thejavatest.study.StudyStatus;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 public class Study {

@@ -3,10 +3,17 @@ package me.park.thejavatest.study;
 import me.park.thejavatest.domain.Member;
 import me.park.thejavatest.domain.Study;
 import me.park.thejavatest.member.MemberService;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 
 import java.util.Optional;
@@ -14,12 +21,32 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
+@Testcontainers
 class StudyServiceTest {
 
+    @Mock MemberService memberService;
+    @Autowired
+    private StudyRepository studyRepository;
+
+    static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer()
+            .withDatabaseName("studytest");
+
+    @BeforeAll
+    static void beforeAll() {
+        postgreSQLContainer.start();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        postgreSQLContainer.stop();
+    }
+
     @Test
-    void createNewStudy(@Mock MemberService memberService,
-                        @Mock StudyRepository studyRepository) {
+    void createNewStudy() {
 
         StudyService studyService = new StudyService(memberService, studyRepository);
         assertNotNull(studyService);

@@ -3,12 +3,10 @@ package me.park.thejavatest.study;
 import me.park.thejavatest.domain.Member;
 import me.park.thejavatest.domain.Study;
 import me.park.thejavatest.member.MemberService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
